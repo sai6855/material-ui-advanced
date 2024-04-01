@@ -73,11 +73,11 @@ export default function SwipeableTabs() {
           console.log("pointer move", e.clientX, e.clientY);
           setRemove(e.clientX);
           set((aa) => aa + 1);
-          if (pointerEnterCoordinates.current.x - e.clientX > 20) {
-            setValue(1);
-            pointerEnterCoordinates.current.x = 0;
-            pointerEnterCoordinates.current.y = 0;
-          }
+        //   if (pointerEnterCoordinates.current.x - e.clientX > 20) {
+        //     setValue(1);
+        //     pointerEnterCoordinates.current.x = 0;
+        //     pointerEnterCoordinates.current.y = 0;
+        //   }
         }}
       >
         Item One {remove} , {pointerEnterCoordinates.current.x}
