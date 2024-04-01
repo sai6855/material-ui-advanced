@@ -5,6 +5,7 @@ import NestedMenu from "@/src/components/SubMenu";
 import DebouncedInput from "@/src/components/DebouncedInput";
 import OTPInput from "@/src/components/OtpInput";
 import InputFileUpload from "@/src/components/FileUpload";
+import SwipeableTabs from "@/src/components/SwipeableTabs";
 
 // nested menu - done
 // button drag-and-drop
@@ -19,6 +20,7 @@ export default function BasicButtons() {
       <DebouncedInput />
       <OTPInput />
       <InputFileUpload />
+      <SwipeableTabs />
     </>
   );
 }
