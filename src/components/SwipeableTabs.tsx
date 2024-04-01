@@ -69,7 +69,7 @@ export default function SwipeableTabs() {
         }}
         onPointerMove={(e) => {
           console.log("pointer move", e.clientX, e.clientY);
-          if (e.clientX - pointerEnterCoordinates.current.x > 20) {
+          if (pointerEnterCoordinates.current.x  - e.clientX> 20) {
             setValue(1);
           }
         }}
