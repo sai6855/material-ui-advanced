@@ -11,7 +11,7 @@ interface TabPanelProps {
   value: number;
 }
 
-function CustomTabPanel(props: TabPanelProps) {
+function CustomTabPanel(props: TabPanelProps & React.ComponentProps<"div">) {
   const { children, value, index, ...other } = props;
 
   return (
@@ -45,6 +45,8 @@ export default function SwipeableTabs() {
     setValue(newValue);
   };
 
+  const pointerEnterCoordinates = React.useRef({ x: 0, y: 0 });
+
   return (
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -58,7 +60,20 @@ export default function SwipeableTabs() {
           <Tab label="Item Three" {...a11yProps(2)} />
         </Tabs>
       </Box>
-      <CustomTabPanel value={value} index={0}>
+      <CustomTabPanel
+        value={value}
+        index={0}
+        onPointerEnter={(e) => {
+          pointerEnterCoordinates.current.x = e.clientX;
+          pointerEnterCoordinates.current.y = e.clientY;
+        }}
+        onPointerMove={(e) => {
+          console.log("pointer move", e.clientX, e.clientY);
+          if (e.clientX - pointerEnterCoordinates.current.x > 20) {
+            setValue(1);
+          }
+        }}
+      >
         Item One
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
