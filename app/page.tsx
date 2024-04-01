@@ -3,6 +3,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import NestedMenu from "@/src/components/SubMenu";
 import DebouncedInput from "@/src/components/DebouncedInput";
+import OTPInput from "@/src/components/OtpInput";
 
 // nested menu
 // button drag-and-drop
@@ -15,6 +16,7 @@ export default function BasicButtons() {
     <>
       <NestedMenu />
       <DebouncedInput />
+      <OTPInput />
     </>
   );
 }
