@@ -47,6 +47,7 @@ export default function SwipeableTabs() {
 
   const pointerEnterCoordinates = React.useRef({ x: 0, y: 0 });
   const [remove, setRemove] = React.useState(0);
+  const [a, set] = React.useState(0);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -71,6 +72,7 @@ export default function SwipeableTabs() {
         onPointerMove={(e) => {
           console.log("pointer move", e.clientX, e.clientY);
           setRemove(e.clientX);
+          set((aa) => aa + 1);
           if (pointerEnterCoordinates.current.x - e.clientX > 20) {
             setValue(1);
             pointerEnterCoordinates.current.x = 0;
@@ -79,6 +81,7 @@ export default function SwipeableTabs() {
         }}
       >
         Item One {remove} , {pointerEnterCoordinates.current.x}
+        <div>{a}</div>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         Item Two
