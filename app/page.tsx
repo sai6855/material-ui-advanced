@@ -2,6 +2,7 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import NestedMenu from "@/src/components/SubMenu";
+import DebouncedInput from "@/src/components/DebouncedInput";
 
 // nested menu
 // button drag-and-drop
@@ -10,5 +11,10 @@ import NestedMenu from "@/src/components/SubMenu";
 // swipeable tabs
 
 export default function BasicButtons() {
-  return <NestedMenu />;
+  return (
+    <>
+      <NestedMenu />
+      <DebouncedInput />
+    </>
+  );
 }
