@@ -45,42 +45,37 @@ export default function SwipeableTabs() {
     setValue(newValue);
   };
 
-  const pointerEnterCoordinates = React.useRef({ x: 0, y: 0 });
+  const pointerEnterCoordinates = React.useRef(0);
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    pointerEnterCoordinates.current.x = e.touches[0].clientX;
-    pointerEnterCoordinates.current.y = e.touches[0].clientY;
+    pointerEnterCoordinates.current = e.touches[0].clientX;
   };
 
   const handleTouchMove = (e: React.TouchEvent, tabIndex: number) => {
     switch (tabIndex) {
       case 0:
-        if (pointerEnterCoordinates.current.x - e.touches[0].clientX > 8) {
+        if (pointerEnterCoordinates.current - e.touches[0].clientX > 8) {
           setValue(1);
-          pointerEnterCoordinates.current.x = e.touches[0].clientX;
-          pointerEnterCoordinates.current.y = 0;
+          pointerEnterCoordinates.current = 0;
         }
         break;
       case 1:
-        if (pointerEnterCoordinates.current.x - e.touches[0].clientX > 8) {
+        if (pointerEnterCoordinates.current - e.touches[0].clientX > 8) {
           setValue(2);
-          pointerEnterCoordinates.current.x = e.touches[0].clientX;
-          pointerEnterCoordinates.current.y = 0;
+          pointerEnterCoordinates.current = 0;
         } else if (
-          pointerEnterCoordinates.current.x - e.touches[0].clientX <
+          pointerEnterCoordinates.current - e.touches[0].clientX <
           -8
         ) {
           setValue(0);
-          pointerEnterCoordinates.current.x = e.touches[0].clientX;
-          pointerEnterCoordinates.current.y = 0;
+          pointerEnterCoordinates.current = 0;
         }
         break;
 
       case 2:
-        if (pointerEnterCoordinates.current.x - e.touches[0].clientX < -8) {
+        if (pointerEnterCoordinates.current - e.touches[0].clientX < -8) {
           setValue(1);
-          pointerEnterCoordinates.current.x = e.touches[0].clientX;
-          pointerEnterCoordinates.current.y = 0;
+          pointerEnterCoordinates.current = 0;
         }
         break;
     }
