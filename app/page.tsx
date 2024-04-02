@@ -35,13 +35,21 @@ function ComponentWrapper({
 export default function BasicButtons() {
   return (
     <>
-      <NestedMenu />
-      <DebouncedInput />
-      <OTPInput />
+      <ComponentWrapper>
+        <NestedMenu />
+      </ComponentWrapper>
+      <ComponentWrapper>
+        <DebouncedInput />
+      </ComponentWrapper>
+      <ComponentWrapper>
+        <OTPInput />
+      </ComponentWrapper>
       <ComponentWrapper sx={{ py: 6 }}>
         <InputFileUpload />
       </ComponentWrapper>
-      <SwipeableTabs />
+      <ComponentWrapper>
+        <SwipeableTabs />
+      </ComponentWrapper>
     </>
   );
 }
