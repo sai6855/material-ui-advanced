@@ -40,25 +40,53 @@ export default function InputFileUpload() {
         setFileEntered(false);
       }}
     >
-      {fileEntered ? (
-        <p>Drop file</p>
-      ) : (
-        <Button
-          component="label"
-          variant="contained"
-          startIcon={<CloudUploadIcon />}
-        >
-          Upload file
-          <VisuallyHiddenInput
-            type="file"
-            onChange={(e) => {
-              setFile(e.target.files![0]);
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        {fileEntered ? (
+          <Box
+            sx={{
+              textAlign: "center",
+              bgcolor: "#e5e7eb",
+              width: "100%",
+              height: "100%",
+              display: "grid",
+              placeItems: "center",
             }}
-          />
-        </Button>
-      )}
-
-      {file && <p>{file.name}</p>}
+          >
+            <p>Drop file here </p>
+          </Box>
+        ) : (
+          <Box
+            sx={{
+              width: "100%",
+              height: "100%",
+              display: "grid",
+              placeItems: "center",
+            }}
+          >
+            <Box>
+              <Button
+                component="label"
+                variant="contained"
+                startIcon={<CloudUploadIcon />}
+              >
+                Upload file
+                <VisuallyHiddenInput
+                  type="file"
+                  onChange={(e) => {
+                    setFile(e.target.files![0]);
+                  }}
+                />
+              </Button>
+              {file && <p>File:&nbsp;{file.name}</p>}
+            </Box>
+          </Box>
+        )}
+      </Box>
     </Box>
   );
 }

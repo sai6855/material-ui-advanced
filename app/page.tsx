@@ -7,12 +7,6 @@ import OTPInput from "@/src/components/OtpInput";
 import InputFileUpload from "@/src/components/FileUpload";
 import SwipeableTabs from "@/src/components/SwipeableTabs";
 
-// nested menu - done
-// button drag-and-drop
-// otp input - done
-// debounced input - done
-// swipeable tabs
-
 export default function BasicButtons() {
   return (
     <>
