@@ -14,7 +14,7 @@ function ComponentWrapper({
   sx?: SxProps;
 }) {
   return (
-    <Box sx={{ mx: "15rem" }}>
+    <Box sx={{ mx: ["1rem", "15rem"] }}>
       <Box
         sx={{
           p: 2,
