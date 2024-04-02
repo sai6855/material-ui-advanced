@@ -23,7 +23,7 @@ function CustomTabPanel(props: TabPanelProps & React.ComponentProps<"div">) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3, bgcolor: "gray", py: 5 }}>
+        <Box sx={{ p: 3, bgcolor: "#e5e7eb", py: 5 }}>
           <Typography>{children} (swipe here)</Typography>
         </Box>
       )}
