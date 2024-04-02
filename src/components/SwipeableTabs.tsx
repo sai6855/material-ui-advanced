@@ -23,7 +23,7 @@ function CustomTabPanel(props: TabPanelProps & React.ComponentProps<"div">) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3, bgcolor: "gray" }}>
+        <Box sx={{ p: 3, bgcolor: "gray", py: 5 }}>
           <Typography>{children} (swipe here)</Typography>
         </Box>
       )}
@@ -47,6 +47,45 @@ export default function SwipeableTabs() {
 
   const pointerEnterCoordinates = React.useRef({ x: 0, y: 0 });
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    pointerEnterCoordinates.current.x = e.touches[0].clientX;
+    pointerEnterCoordinates.current.y = e.touches[0].clientY;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent, tabIndex: number) => {
+    switch (tabIndex) {
+      case 0:
+        if (pointerEnterCoordinates.current.x - e.touches[0].clientX > 8) {
+          setValue(1);
+          pointerEnterCoordinates.current.x = 0;
+          pointerEnterCoordinates.current.y = 0;
+        }
+        break;
+      case 1:
+        if (pointerEnterCoordinates.current.x - e.touches[0].clientX > 8) {
+          setValue(2);
+          pointerEnterCoordinates.current.x = 0;
+          pointerEnterCoordinates.current.y = 0;
+        } else if (
+          pointerEnterCoordinates.current.x - e.touches[0].clientX <
+          -8
+        ) {
+          setValue(0);
+          pointerEnterCoordinates.current.x = 0;
+          pointerEnterCoordinates.current.y = 0;
+        }
+        break;
+
+      case 2:
+        if (pointerEnterCoordinates.current.x - e.touches[0].clientX < -8) {
+          setValue(1);
+          pointerEnterCoordinates.current.x = 0;
+          pointerEnterCoordinates.current.y = 0;
+        }
+        break;
+    }
+  };
+
   return (
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -63,24 +102,25 @@ export default function SwipeableTabs() {
       <CustomTabPanel
         value={value}
         index={0}
-        onPointerEnter={(e) => {
-          pointerEnterCoordinates.current.x = e.clientX;
-          pointerEnterCoordinates.current.y = e.clientY;
-        }}
-        onPointerMove={(e) => {
-          if (pointerEnterCoordinates.current.x - e.clientX > 10) {
-            setValue(1);
-            pointerEnterCoordinates.current.x = 0;
-            pointerEnterCoordinates.current.y = 0;
-          }
-        }}
+        onTouchStart={(e) => handleTouchStart(e)}
+        onTouchMove={(e) => handleTouchMove(e, 0)}
       >
-        Item One {pointerEnterCoordinates.current.x}
+        Item One
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
+      <CustomTabPanel
+        value={value}
+        index={1}
+        onTouchStart={(e) => handleTouchStart(e)}
+        onTouchMove={(e) => handleTouchMove(e, 1)}
+      >
         Item Two
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
+      <CustomTabPanel
+        value={value}
+        index={2}
+        onTouchStart={(e) => handleTouchStart(e)}
+        onTouchMove={(e) => handleTouchMove(e, 2)}
+      >
         Item Three
       </CustomTabPanel>
     </Box>
