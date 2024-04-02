@@ -24,7 +24,7 @@ export default function InputFileUpload() {
     <Box
       sx={{
         width: "100%",
-        height: "10rem",
+        height: "100%",
       }}
       onDrop={(e) => {
         e.preventDefault();
