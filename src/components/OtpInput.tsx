@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import { Box } from "@mui/system";
+import Box from "@mui/material/Box";
 
 function OTP({
   separator,
