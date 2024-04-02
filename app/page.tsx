@@ -52,7 +52,7 @@ export default function Page() {
       <ComponentWrapper path="src/components/DebouncedInput.tsx">
         <DebouncedInput />
       </ComponentWrapper>
-      <ComponentWrapper path="src/components/OTPInput.tsx">
+      <ComponentWrapper path="src/components/OtpInput.tsx">
         <OTPInput />
       </ComponentWrapper>
       <ComponentWrapper
