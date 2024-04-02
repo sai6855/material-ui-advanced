@@ -57,21 +57,21 @@ export default function SwipeableTabs() {
       case 0:
         if (pointerEnterCoordinates.current.x - e.touches[0].clientX > 8) {
           setValue(1);
-          pointerEnterCoordinates.current.x = 0;
+          pointerEnterCoordinates.current.x = e.touches[0].clientX;
           pointerEnterCoordinates.current.y = 0;
         }
         break;
       case 1:
         if (pointerEnterCoordinates.current.x - e.touches[0].clientX > 8) {
           setValue(2);
-          pointerEnterCoordinates.current.x = 0;
+          pointerEnterCoordinates.current.x = e.touches[0].clientX;
           pointerEnterCoordinates.current.y = 0;
         } else if (
           pointerEnterCoordinates.current.x - e.touches[0].clientX <
           -8
         ) {
           setValue(0);
-          pointerEnterCoordinates.current.x = 0;
+          pointerEnterCoordinates.current.x = e.touches[0].clientX;
           pointerEnterCoordinates.current.y = 0;
         }
         break;
@@ -79,7 +79,7 @@ export default function SwipeableTabs() {
       case 2:
         if (pointerEnterCoordinates.current.x - e.touches[0].clientX < -8) {
           setValue(1);
-          pointerEnterCoordinates.current.x = 0;
+          pointerEnterCoordinates.current.x = e.touches[0].clientX;
           pointerEnterCoordinates.current.y = 0;
         }
         break;
