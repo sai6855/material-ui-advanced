@@ -1,18 +1,28 @@
 import * as React from "react";
-import NestedMenu from "@/src/components/SubMenu";
+import NestedMenu from "@/src/components/NestedMenu";
 import DebouncedInput from "@/src/components/DebouncedInput";
 import OTPInput from "@/src/components/OtpInput";
-import InputFileUpload from "@/src/components/FileUpload";
+import InputFileUpload from "@/src/components/InputFileUpload";
 import SwipeableTabs from "@/src/components/SwipeableTabs";
 import { Box, SxProps } from "@mui/material";
+import fs from "node:fs";
+import ComponentFooter from "@/src/ComponentFooter";
 
 function ComponentWrapper({
   children,
   sx,
+  path,
 }: {
   children: React.ReactNode;
   sx?: SxProps;
+  path: string;
 }) {
+  const content = fs
+    .readFileSync(path, "utf-8")
+    .split("\n")
+    .slice(1)
+    .join("\n");
+
   return (
     <Box sx={{ mx: ["1rem", "15rem"] }}>
       <Box
@@ -28,26 +38,30 @@ function ComponentWrapper({
       >
         {children}
       </Box>
+      <ComponentFooter content={content} />
     </Box>
   );
 }
 
-export default function BasicButtons() {
+export default function Page() {
   return (
     <>
-      <ComponentWrapper>
+      <ComponentWrapper path="src/components/NestedMenu.tsx">
         <NestedMenu />
       </ComponentWrapper>
-      <ComponentWrapper>
+      <ComponentWrapper path="src/components/DebouncedInput.tsx">
         <DebouncedInput />
       </ComponentWrapper>
-      <ComponentWrapper>
+      <ComponentWrapper path="src/components/OTPInput.tsx">
         <OTPInput />
       </ComponentWrapper>
-      <ComponentWrapper sx={{ py: 6 }}>
+      <ComponentWrapper
+        sx={{ py: 6 }}
+        path="src/components/InputFileUpload.tsx"
+      >
         <InputFileUpload />
       </ComponentWrapper>
-      <ComponentWrapper>
+      <ComponentWrapper path="src/components/SwipeableTabs.tsx">
         <SwipeableTabs />
       </ComponentWrapper>
     </>
