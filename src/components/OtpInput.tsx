@@ -180,6 +180,12 @@ function OTP({
               )
             }
             value={value[index] ?? ""}
+            inputProps={{
+              sx: {
+                textAlign: "center",
+              },
+            }}
+            sx={{ width: "2.5rem", height: "2.5rem" }}
           />
           {index === length - 1 ? null : separator}
         </React.Fragment>

@@ -33,7 +33,8 @@ function ComponentWrapper({
           borderRadius: 3,
           width: "100%",
           py: 4,
-          ...sx,
+          display:"grid",
+          placeItems:"center",
         }}
       >
         {children}
@@ -46,7 +47,10 @@ function ComponentWrapper({
 export default function Page() {
   return (
     <>
-      <ComponentWrapper path="src/components/NestedMenu.tsx">
+      <ComponentWrapper
+        path="src/components/NestedMenu.tsx"
+        sx={{ display: "grid", placeItems: "center" }}
+      >
         <NestedMenu />
       </ComponentWrapper>
       <ComponentWrapper path="src/components/DebouncedInput.tsx">
