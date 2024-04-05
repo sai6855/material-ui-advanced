@@ -13,7 +13,7 @@ function Header({
   description,
 }: {
   title: string;
-  description: string;
+  description: string | React.JSX.Element;
 }) {
   return (
     <>
@@ -40,7 +40,7 @@ function ComponentWrapper({
   sx?: SxProps;
   path: string;
   title: string;
-  description: string;
+  description: string | React.JSX.Element;
 }) {
   const content = fs
     .readFileSync(path, "utf-8")
@@ -85,7 +85,7 @@ export default function Page() {
       <div style={{ textAlign: "center", opacity: "0.7" }}>
         Collection of advanced Material-UI components that can be used in your
         projects. Each component comes with its own source code that you can
-        copy and paste into your project.
+        <strong> copy and paste </strong> into your project.
       </div>
       <ComponentWrapper
         title="Nested Menu"
@@ -110,7 +110,12 @@ export default function Page() {
         <OTPInput />
       </ComponentWrapper>
       <ComponentWrapper
-        description="A file upload component that allows users to select files for upload, also supports drag-and-drop functionality."
+        description={
+          <span>
+            A file upload component that allows users to select files for
+            upload, also supports <strong> drag-and-drop </strong> functionality
+          </span>
+        }
         title="Input File Upload"
         sx={{ py: 6 }}
         path="src/components/InputFileUpload.tsx"
