@@ -1,6 +1,6 @@
 # material-ui-advanced
 
-## Description
+## About
 
 Collection of advanced Material-UI components that can be used in your projects. Each component comes with its own source code that you can copy and paste into your project.
 
