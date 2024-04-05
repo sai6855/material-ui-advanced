@@ -153,7 +153,7 @@ function SubMenu({ options, menuLevels, onOptionClick }: SubMenuProps) {
       const { x, y, height } = submenu.getBoundingClientRect();
 
       // Form a virtual triangle using the left mouse coordinates and the top-left and bottom-left coordinates of the submenu. If the current mouse coordinates fall within this triangle, skip the submenu logic computation.
-      // Check https://twitter.com/diegohaz/status/1283558204178407427 for more context.
+      // Check https://x.com/diegohaz/status/1283557901701918720 for more context.
       const currentMouseCoordinates = [event.clientX, -event.clientY];
       const virtualTriangleCordinates = [
         [x, -y],
