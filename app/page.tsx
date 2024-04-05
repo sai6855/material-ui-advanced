@@ -33,13 +33,16 @@ function ComponentWrapper({
           borderRadius: 3,
           width: "100%",
           py: 4,
-          display:"grid",
-          placeItems:"center",
+          display: "grid",
+          placeItems: "center",
         }}
       >
         {children}
       </Box>
-      <ComponentFooter content={content} />
+      <ComponentFooter
+        content={content}
+        sourceCode={`https://github.com/sai6855/material-ui-advanced/blob/master/${path}`}
+      />
     </Box>
   );
 }
