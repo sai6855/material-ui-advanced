@@ -8,8 +8,25 @@ import { Box, Divider, SxProps } from "@mui/material";
 import fs from "node:fs";
 import ComponentFooter from "@/src/ComponentFooter";
 
-function Header({ title }: { title: string }) {
-  return <h2>{title}</h2>;
+function Header({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) {
+  return (
+    <>
+      <h2>{title}</h2>
+      <p
+        style={{
+          margin: "1rem 0",
+        }}
+      >
+        {description}
+      </p>
+    </>
+  );
 }
 
 function ComponentWrapper({
@@ -17,11 +34,13 @@ function ComponentWrapper({
   sx,
   path,
   title,
+  description,
 }: {
   children: React.ReactNode;
   sx?: SxProps;
   path: string;
   title: string;
+  description: string;
 }) {
   const content = fs
     .readFileSync(path, "utf-8")
@@ -31,11 +50,10 @@ function ComponentWrapper({
 
   return (
     <Box sx={{ mx: ["1rem", "15rem"], my: "1rem" }}>
-      <Header title={title} />
+      <Header title={title} description={description} />
       <Box
         sx={{
           p: 2,
-          m: 1,
           border: "1px solid #cbd5e1",
           borderRadius: 3,
           width: "100%",
@@ -61,20 +79,27 @@ export default function Page() {
       <ComponentWrapper
         title="Nested Menu"
         path="src/components/NestedMenu.tsx"
+        description="A component for organizing menu items into subcategories, enabling easier navigation through hierarchical menus."
         sx={{ display: "grid", placeItems: "center" }}
       >
         <NestedMenu />
       </ComponentWrapper>
       <ComponentWrapper
+        description="An input field that delays processing user input until they pause typing"
         title="Debounced Input"
         path="src/components/DebouncedInput.tsx"
       >
         <DebouncedInput />
       </ComponentWrapper>
-      <ComponentWrapper title="OTP Input" path="src/components/OtpInput.tsx">
+      <ComponentWrapper
+        description="A specialized input field for entering one-time passwords"
+        title="OTP Input"
+        path="src/components/OtpInput.tsx"
+      >
         <OTPInput />
       </ComponentWrapper>
       <ComponentWrapper
+        description="A file upload component that allows users to select files for upload, also supports drag-and-drop functionality."
         title="Input File Upload"
         sx={{ py: 6 }}
         path="src/components/InputFileUpload.tsx"
@@ -82,6 +107,7 @@ export default function Page() {
         <InputFileUpload />
       </ComponentWrapper>
       <ComponentWrapper
+        description="Tabs you can slide through to switch between different sections, making it easy to navigate on touchscreens."
         title="Swipeable Tabs"
         path="src/components/SwipeableTabs.tsx"
       >

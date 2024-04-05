@@ -307,7 +307,7 @@ function SubMenu({ options, menuLevels, onOptionClick }: SubMenuProps) {
 
 export default function NestedMenu() {
   const handleClickOption = (option: Option) => {
-    console.log(`You clicked on ${option.value}`);
+    alert(`You clicked on ${option.value}`);
   };
 
   const options = [
