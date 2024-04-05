@@ -49,7 +49,7 @@ function ComponentWrapper({
     .join("\n");
 
   return (
-    <Box sx={{ mx: ["1rem", "15rem"], my: "1rem" }}>
+    <Box sx={{ my: "1rem" }}>
       <Header title={title} description={description} />
       <Box
         sx={{
@@ -75,7 +75,18 @@ function ComponentWrapper({
 
 export default function Page() {
   return (
-    <>
+    <Box sx={{ mx: ["1rem", "15rem"] }}>
+      <Box
+        component={"h1"}
+        sx={{ textAlign: "center", my: "1rem", color: "#6c6bac" }}
+      >
+        Material UI advanced
+      </Box>
+      <div style={{ textAlign: "center", opacity: "0.7" }}>
+        Collection of advanced Material-UI components that can be used in your
+        projects. Each component comes with its own source code that you can
+        copy and paste into your project.
+      </div>
       <ComponentWrapper
         title="Nested Menu"
         path="src/components/NestedMenu.tsx"
@@ -113,6 +124,6 @@ export default function Page() {
       >
         <SwipeableTabs />
       </ComponentWrapper>
-    </>
+    </Box>
   );
 }
