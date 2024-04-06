@@ -2,7 +2,7 @@
 
 ## About
 
-Collection of advanced Material-UI components that can be used in your projects. Each component comes with its own source code that you can copy and paste into your project.
+Collection of UI components built on top of material-ui that can be used in your projects. Each component comes with its own source code that you can copy and paste into your project.
 
 Explore the components and view demos at [material-ui-advanced.vercel.app](https://material-ui-advanced.vercel.app/).
 
