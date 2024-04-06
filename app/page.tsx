@@ -98,7 +98,7 @@ export default function Page() {
           </IconButton>
         </Box>
         <div style={{ textAlign: "center", opacity: "0.7" }}>
-          Collection of advanced Material-UI components that can be used in your
+          Collection of advanced UI components bulit on top of material-ui that can be used in your
           projects. Each component comes with its own source code that you can
           <strong> copy and paste </strong> into your project.
         </div>
