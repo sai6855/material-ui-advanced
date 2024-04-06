@@ -7,6 +7,7 @@ import SwipeableTabs from "@/src/components/SwipeableTabs";
 import { Box, Divider, SxProps } from "@mui/material";
 import fs from "node:fs";
 import ComponentFooter from "@/src/ComponentFooter";
+import ScrollTo from "./components/ScrollTo";
 
 function Header({
   title,
@@ -35,12 +36,14 @@ function ComponentWrapper({
   path,
   title,
   description,
+  id,
 }: {
   children: React.ReactNode;
   sx?: SxProps;
   path: string;
   title: string;
   description: string | React.JSX.Element;
+  id: string;
 }) {
   const content = fs
     .readFileSync(path, "utf-8")
@@ -49,7 +52,7 @@ function ComponentWrapper({
     .join("\n");
 
   return (
-    <Box sx={{ my: "1rem" }}>
+    <Box sx={{ my: "1rem" }} id={id}>
       <Header title={title} description={description} />
       <Box
         sx={{
@@ -75,60 +78,68 @@ function ComponentWrapper({
 
 export default function Page() {
   return (
-    <Box sx={{ mx: ["1rem", "15rem"] }}>
-      <Box
-        component={"h1"}
-        sx={{ textAlign: "center", my: "1rem", color: "#6c6bac" }}
-      >
-        Material UI advanced
-      </Box>
-      <div style={{ textAlign: "center", opacity: "0.7" }}>
-        Collection of advanced Material-UI components that can be used in your
-        projects. Each component comes with its own source code that you can
-        <strong> copy and paste </strong> into your project.
-      </div>
-      <ComponentWrapper
-        title="Nested Menu"
-        path="src/components/NestedMenu.tsx"
-        description="A component for organizing menu items into subcategories, enabling easier navigation through hierarchical menus."
-        sx={{ display: "grid", placeItems: "center" }}
-      >
-        <NestedMenu />
-      </ComponentWrapper>
-      <ComponentWrapper
-        description="An input field that delays processing user input until they pause typing"
-        title="Debounced Input"
-        path="src/components/DebouncedInput.tsx"
-      >
-        <DebouncedInput />
-      </ComponentWrapper>
-      <ComponentWrapper
-        description="A specialized input field for entering one-time passwords"
-        title="OTP Input"
-        path="src/components/OtpInput.tsx"
-      >
-        <OTPInput />
-      </ComponentWrapper>
-      <ComponentWrapper
-        description={
-          <span>
-            A file upload component that allows users to select files for
-            upload, also supports <strong> drag-and-drop </strong> functionality
-          </span>
-        }
-        title="Input File Upload"
-        sx={{ py: 6 }}
-        path="src/components/InputFileUpload.tsx"
-      >
-        <InputFileUpload />
-      </ComponentWrapper>
-      <ComponentWrapper
-        description="Tabs you can slide through to switch between different sections, making it easy to navigate on touchscreens."
-        title="Swipeable Tabs"
-        path="src/components/SwipeableTabs.tsx"
-      >
-        <SwipeableTabs />
-      </ComponentWrapper>
+    <Box sx={{ mx: ["1rem", "15rem"] }} id="main">
+      <ScrollTo>
+        <Box
+          component={"h1"}
+          sx={{ textAlign: "center", my: "1rem", color: "#6c6bac" }}
+        >
+          Material UI advanced
+        </Box>
+        <div style={{ textAlign: "center", opacity: "0.7" }}>
+          Collection of advanced Material-UI components that can be used in your
+          projects. Each component comes with its own source code that you can
+          <strong> copy and paste </strong> into your project.
+        </div>
+        <ComponentWrapper
+          id="nested-menu"
+          title="Nested Menu"
+          path="src/components/NestedMenu.tsx"
+          description="A component for organizing menu items into subcategories, enabling easier navigation through hierarchical menus."
+          sx={{ display: "grid", placeItems: "center" }}
+        >
+          <NestedMenu />
+        </ComponentWrapper>
+        <ComponentWrapper
+          id="debounced-input"
+          description="An input field that delays processing user input until they pause typing"
+          title="Debounced Input"
+          path="src/components/DebouncedInput.tsx"
+        >
+          <DebouncedInput />
+        </ComponentWrapper>
+        <ComponentWrapper
+          id="otp-input"
+          description="A specialized input field for entering one-time passwords"
+          title="OTP Input"
+          path="src/components/OtpInput.tsx"
+        >
+          <OTPInput />
+        </ComponentWrapper>
+        <ComponentWrapper
+          id="input-file-upload"
+          description={
+            <span>
+              A file upload component that allows users to select files for
+              upload, also supports <strong> drag-and-drop </strong>{" "}
+              functionality
+            </span>
+          }
+          title="Input File Upload"
+          sx={{ py: 6 }}
+          path="src/components/InputFileUpload.tsx"
+        >
+          <InputFileUpload />
+        </ComponentWrapper>
+        <ComponentWrapper
+          id="swipeable-tabs"
+          description="Tabs you can slide through to switch between different sections, making it easy to navigate on touchscreens."
+          title="Swipeable Tabs"
+          path="src/components/SwipeableTabs.tsx"
+        >
+          <SwipeableTabs />
+        </ComponentWrapper>
+      </ScrollTo>
     </Box>
   );
 }
