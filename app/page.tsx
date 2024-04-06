@@ -4,10 +4,11 @@ import DebouncedInput from "@/src/components/DebouncedInput";
 import OTPInput from "@/src/components/OtpInput";
 import InputFileUpload from "@/src/components/InputFileUpload";
 import SwipeableTabs from "@/src/components/SwipeableTabs";
-import { Box, Divider, SxProps } from "@mui/material";
+import { Box, Divider, IconButton, SxProps } from "@mui/material";
 import fs from "node:fs";
 import ComponentFooter from "@/src/ComponentFooter";
 import ScrollTo from "./components/ScrollTo";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 function Header({
   title,
@@ -81,10 +82,20 @@ export default function Page() {
     <Box sx={{ mx: ["1rem", "15rem"] }} id="main">
       <ScrollTo>
         <Box
-          component={"h1"}
-          sx={{ textAlign: "center", my: "1rem", color: "#6c6bac" }}
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
         >
-          Material UI advanced
+          <span/>
+          <Box component={"h1"} sx={{ my: "1rem", color: "#6c6bac" }}>
+            Material UI advanced
+          </Box>
+          <IconButton href="https://github.com/sai6855/material-ui-advanced">
+            <GitHubIcon htmlColor="black" fontSize="large" />
+          </IconButton>
         </Box>
         <div style={{ textAlign: "center", opacity: "0.7" }}>
           Collection of advanced Material-UI components that can be used in your
