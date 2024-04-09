@@ -27,6 +27,9 @@ const StackedSnackBarBody = ({
 }) => {
   const TIMEOUT = 200;
 
+  const clearTimerCount = React.useRef(0);
+  const timer = React.useRef<NodeJS.Timeout | null>(null);
+
   const handleClose = (
     event: React.SyntheticEvent | Event,
     reason: string,
@@ -39,8 +42,15 @@ const StackedSnackBarBody = ({
       prev.map((_, i) => (i === index ? { ..._, open: false } : _))
     );
 
-    setTimeout(() => {
+    clearTimerCount.current += 1;
+    if (timer.current) clearInterval(timer.current!);
+
+    timer.current = setInterval(() => {
+      if (clearTimerCount.current === 0) {
+        clearInterval(timer.current!);
+      }
       setStacked((prev) => prev.filter(({ open }) => open));
+      clearTimerCount.current--;
     }, TIMEOUT);
   };
 
@@ -117,7 +127,7 @@ function StackedSnackBarDemo() {
     <>
       <Button onClick={handleClick}>Open Stacked Snackbars</Button>
       <StackedSnackBarBody
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         stacked={stacked}
         setStacked={setStacked}
       />
