@@ -9,31 +9,22 @@ import IconButton from "@mui/material/IconButton";
 import Slide, { SlideProps } from "@mui/material/Slide";
 import CloseIcon from "@mui/icons-material/Close";
 
-type StackedSnackBarProps = Omit<SnackbarProps, "children"> & {
-  children?: React.ReactNode;
-  stacked: Array<{ open: boolean; key: number; message: string }>;
-  setStacked: React.Dispatch<
-    React.SetStateAction<Array<{ open: boolean; key: number; message: string }>>
-  >;
-};
-
-const StackedSnackBarContext = React.createContext<StackedSnackBarProps>({
-  stacked: [],
-  setStacked: () => {},
-});
-
 function SlideTransition(props: SlideProps) {
   return <Slide {...props} direction="left" />;
 }
 
-const StackedSnackBarBody = () => {
-  const {
-    anchorOrigin = { vertical: "top", horizontal: "right" },
-    children,
-    stacked,
-    setStacked,
-    ...props
-  } = React.useContext(StackedSnackBarContext);
+const StackedSnackBarBody = ({
+  anchorOrigin = { vertical: "top", horizontal: "right" },
+  children,
+  stacked,
+  setStacked,
+  ...props
+}: SnackbarProps & {
+  stacked: Array<{ open: boolean; key: number; message: string }>;
+  setStacked: React.Dispatch<
+    React.SetStateAction<Array<{ open: boolean; key: number; message: string }>>
+  >;
+}) => {
   const TIMEOUT = 200;
 
   const handleClose = (
@@ -89,14 +80,6 @@ const StackedSnackBarBody = () => {
   );
 };
 
-function StackedSnackBar(props: StackedSnackBarProps) {
-  return (
-    <StackedSnackBarContext.Provider value={props}>
-      {props.children}
-    </StackedSnackBarContext.Provider>
-  );
-}
-
 function StackedSnackBarDemo() {
   const snackbarMessages = [
     "Message sent successfully!",
@@ -132,14 +115,12 @@ function StackedSnackBarDemo() {
 
   return (
     <>
-      <StackedSnackBar
+      <Button onClick={handleClick}>Open Stacked Snackbars</Button>
+      <StackedSnackBarBody
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         stacked={stacked}
         setStacked={setStacked}
-      >
-        <Button onClick={handleClick}>Open Stacked Snackbars</Button>
-        <StackedSnackBarBody />
-      </StackedSnackBar>
+      />
     </>
   );
 }
