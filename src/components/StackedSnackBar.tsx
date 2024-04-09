@@ -9,9 +9,13 @@ import IconButton from "@mui/material/IconButton";
 import Slide, { SlideProps } from "@mui/material/Slide";
 import CloseIcon from "@mui/icons-material/Close";
 
-function SlideTransition(props: SlideProps) {
+const LeftTransition = (props: SlideProps) => {
   return <Slide {...props} direction="left" />;
-}
+};
+
+const RightTransition = (props: SlideProps) => {
+  return <Slide {...props} direction="right" />;
+};
 
 const StackedSnackBarBody = ({
   anchorOrigin = { vertical: "top", horizontal: "right" },
@@ -71,7 +75,11 @@ const StackedSnackBarBody = ({
                 [anchorOrigin.vertical]: (index + 1) * 24 + index * 30 + "px",
               },
             }}
-            TransitionComponent={SlideTransition}
+            TransitionComponent={
+              anchorOrigin.horizontal === "right"
+                ? LeftTransition
+                : RightTransition
+            }
             TransitionProps={{ timeout: TIMEOUT }}
             action={
               <IconButton
@@ -127,7 +135,7 @@ function StackedSnackBarDemo() {
     <>
       <Button onClick={handleClick}>Open Stacked Snackbars</Button>
       <StackedSnackBarBody
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
         stacked={stacked}
         setStacked={setStacked}
       />
