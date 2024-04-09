@@ -24,6 +24,8 @@ Stay tuned for the following upcoming components:
 
 - Stacked Snackbar
 - Tagging in Text Area
+- Tour
+- Carousel
 
 ---
 
