@@ -31,6 +31,8 @@ const StackedSnackBar = ({
 }: {
   maxCount: number;
 } & SnackbarProps) => {
+  const TIMEOUT = 200;
+
   const [stacked, setStacked] = React.useState<
     Array<{ open: boolean; key: number; message: string }>
   >([]);
@@ -68,7 +70,7 @@ const StackedSnackBar = ({
 
     setTimeout(() => {
       setStacked((prev) => prev.filter(({ open }) => open));
-    }, 200);
+    }, TIMEOUT);
   };
 
   return (
@@ -90,7 +92,7 @@ const StackedSnackBar = ({
               },
             }}
             TransitionComponent={SlideTransition}
-            TransitionProps={{ timeout: 200 }}
+            TransitionProps={{ timeout: TIMEOUT }}
             action={
               <IconButton
                 size="small"
