@@ -70,7 +70,7 @@ export default function InputFileUpload() {
           >
             <Box>
               <Button
-                component="label"
+             
                 variant="contained"
                 startIcon={<CloudUploadIcon />}
               >

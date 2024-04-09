@@ -9,6 +9,7 @@ import fs from "node:fs";
 import ComponentFooter from "@/src/ComponentFooter";
 import ScrollTo from "./components/ScrollTo";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import StackedSnackBarDemo from "@/src/components/StackedSnackBar";
 
 function Header({
   title,
@@ -149,6 +150,14 @@ export default function Page() {
           path="src/components/SwipeableTabs.tsx"
         >
           <SwipeableTabs />
+        </ComponentWrapper>
+        <ComponentWrapper
+          id="stacked-snackbar"
+          description="A stack of snackbars that appear one on top of the other, allowing users to see multiple notifications at once."
+          title="Stacked Snackbar"
+          path="src/components/StackedSnackBar.tsx"
+        >
+          <StackedSnackBarDemo />
         </ComponentWrapper>
       </ScrollTo>
     </Box>
