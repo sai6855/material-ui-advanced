@@ -63,10 +63,12 @@ const StackedSnackBar = ({
       return;
     }
     setStacked((prev) =>
-      prev
-        .map((_, i) => (i === index ? { ..._, open: false } : _))
-        .filter(({ open }) => open)
+      prev.map((_, i) => (i === index ? { ..._, open: false } : _))
     );
+
+    setTimeout(() => {
+      setStacked((prev) => prev.filter(({ open }) => open));
+    }, 200);
   };
 
   return (
@@ -88,6 +90,7 @@ const StackedSnackBar = ({
               },
             }}
             TransitionComponent={SlideTransition}
+            TransitionProps={{ timeout: 200 }}
             action={
               <IconButton
                 size="small"
