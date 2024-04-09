@@ -6,7 +6,12 @@ import Snackbar, {
 } from "@mui/material/Snackbar";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
+import Slide, { SlideProps } from "@mui/material/Slide";
 import CloseIcon from "@mui/icons-material/Close";
+
+function SlideTransition(props: SlideProps) {
+  return <Slide {...props} direction="left" />;
+}
 
 const snackbarMessages = [
   "Message sent successfully!",
@@ -41,7 +46,9 @@ const StackedSnackBar = ({
       {
         open: true,
         key: count.current,
-        message: snackbarMessages[prev.length],
+        message:
+          snackbarMessages[prev.length] ??
+          snackbarMessages[Math.floor(Math.random() * snackbarMessages.length)],
       },
     ]);
     count.current += 1;
@@ -80,6 +87,7 @@ const StackedSnackBar = ({
                 [anchorOrigin.vertical]: (index + 1) * 24 + index * 30 + "px",
               },
             }}
+            TransitionComponent={SlideTransition}
             action={
               <IconButton
                 size="small"
@@ -100,7 +108,7 @@ const StackedSnackBar = ({
 function StackedSnackBarDemo() {
   return (
     <StackedSnackBar
-      maxCount={5}
+      maxCount={10}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
     />
   );
