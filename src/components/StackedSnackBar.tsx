@@ -17,6 +17,21 @@ const RightTransition = (props: SlideProps) => {
   return <Slide {...props} direction="right" />;
 };
 
+const UpTransition = (props: SlideProps) => {
+  return <Slide {...props} direction="up" />;
+};
+
+const DownTransition = (props: SlideProps) => {
+  return <Slide {...props} direction="down" />;
+};
+
+const slideTransition = {
+  left: RightTransition,
+  right: LeftTransition,
+  top: DownTransition,
+  bottom: UpTransition,
+};
+
 const StackedSnackBarBody = ({
   anchorOrigin = { vertical: "top", horizontal: "right" },
   children,
@@ -76,9 +91,9 @@ const StackedSnackBarBody = ({
               },
             }}
             TransitionComponent={
-              anchorOrigin.horizontal === "right"
-                ? LeftTransition
-                : RightTransition
+              anchorOrigin.horizontal === "center"
+                ? slideTransition[anchorOrigin.vertical]
+                : slideTransition[anchorOrigin.horizontal]
             }
             TransitionProps={{ timeout: TIMEOUT }}
             action={
@@ -135,7 +150,7 @@ function StackedSnackBarDemo() {
     <>
       <Button onClick={handleClick}>Open Stacked Snackbars</Button>
       <StackedSnackBarBody
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
         stacked={stacked}
         setStacked={setStacked}
       />
