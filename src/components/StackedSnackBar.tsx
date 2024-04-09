@@ -9,52 +9,32 @@ import IconButton from "@mui/material/IconButton";
 import Slide, { SlideProps } from "@mui/material/Slide";
 import CloseIcon from "@mui/icons-material/Close";
 
+type StackedSnackBarProps = Omit<SnackbarProps, "children"> & {
+  children?: React.ReactNode;
+  stacked: Array<{ open: boolean; key: number; message: string }>;
+  setStacked: React.Dispatch<
+    React.SetStateAction<Array<{ open: boolean; key: number; message: string }>>
+  >;
+};
+
+const StackedSnackBarContext = React.createContext<StackedSnackBarProps>({
+  stacked: [],
+  setStacked: () => {},
+});
+
 function SlideTransition(props: SlideProps) {
   return <Slide {...props} direction="left" />;
 }
 
-const snackbarMessages = [
-  "Message sent successfully!",
-  "Error: Please check your internet connection.",
-  "Welcome back! You have new notifications.",
-  "Thank you for your order!",
-  "Reminder: Your appointment is tomorrow.",
-];
-
-const StackedSnackBar = ({
-  maxCount = 5,
-  anchorOrigin = {
-    vertical: "bottom",
-    horizontal: "right",
-  },
-  ...props
-}: {
-  maxCount: number;
-} & SnackbarProps) => {
+const StackedSnackBarBody = () => {
+  const {
+    anchorOrigin = { vertical: "top", horizontal: "right" },
+    children,
+    stacked,
+    setStacked,
+    ...props
+  } = React.useContext(StackedSnackBarContext);
   const TIMEOUT = 200;
-
-  const [stacked, setStacked] = React.useState<
-    Array<{ open: boolean; key: number; message: string }>
-  >([]);
-
-  const count = React.useRef(0);
-
-  const handleClick = () => {
-    if (stacked.length >= maxCount) {
-      return;
-    }
-    setStacked((prev) => [
-      ...prev,
-      {
-        open: true,
-        key: count.current,
-        message:
-          snackbarMessages[prev.length] ??
-          snackbarMessages[Math.floor(Math.random() * snackbarMessages.length)],
-      },
-    ]);
-    count.current += 1;
-  };
 
   const handleClose = (
     event: React.SyntheticEvent | Event,
@@ -75,7 +55,6 @@ const StackedSnackBar = ({
 
   return (
     <div>
-      <Button onClick={handleClick}>Open Snackbar</Button>
       {stacked.map(({ open, key, message }, index) => {
         return (
           <Snackbar
@@ -110,12 +89,58 @@ const StackedSnackBar = ({
   );
 };
 
-function StackedSnackBarDemo() {
+function StackedSnackBar(props: StackedSnackBarProps) {
   return (
-    <StackedSnackBar
-      maxCount={10}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-    />
+    <StackedSnackBarContext.Provider value={props}>
+      {props.children}
+    </StackedSnackBarContext.Provider>
+  );
+}
+
+function StackedSnackBarDemo() {
+  const snackbarMessages = [
+    "Message sent successfully!",
+    "Error: Please check your internet connection.",
+    "Welcome back! You have new notifications.",
+    "Thank you for your order!",
+    "Reminder: Your appointment is tomorrow.",
+  ];
+
+  const [stacked, setStacked] = React.useState<
+    Array<{ open: boolean; key: number; message: string }>
+  >([]);
+
+  const count = React.useRef(0);
+  const maxCount = 5;
+
+  const handleClick = () => {
+    if (stacked.length >= maxCount) {
+      return;
+    }
+    setStacked((prev) => [
+      ...prev,
+      {
+        open: true,
+        key: count.current,
+        message:
+          snackbarMessages[prev.length] ??
+          snackbarMessages[Math.floor(Math.random() * snackbarMessages.length)],
+      },
+    ]);
+    count.current += 1;
+  };
+
+  return (
+    <>
+      <StackedSnackBar
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        stacked={stacked}
+        setStacked={setStacked}
+      >
+        <Button onClick={handleClick}>Open Stacked Snackbars</Button>
+        <StackedSnackBarBody />
+      </StackedSnackBar>
+    </>
   );
 }
 
