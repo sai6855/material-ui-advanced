@@ -7,9 +7,7 @@ const ScrollTo = ({ children }: { children: React.ReactNode }) => {
 
     if (hash) {
       const id = hash.replace("#", "");
-      const element = document.getElementById(
-        id === "nested-menu" ? "main" : id
-      );
+      const element = document.getElementById(id);
 
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
