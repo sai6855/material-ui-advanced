@@ -6,10 +6,25 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
 const StackedSnackBar = ({ maxCount = 5 }: { maxCount: number }) => {
-  const [stacked, setStacked] = React.useState<Array<boolean>>([]);
+  const [stacked, setStacked] = React.useState<
+    Array<{ open: boolean; key: number; message: string }>
+  >([]);
+
+  const count = React.useRef(0);
 
   const handleClick = () => {
-    setStacked((prev) => [...prev, true]);
+    if (stacked.length >= maxCount) {
+      return;
+    }
+    setStacked((prev) => [
+      ...prev,
+      {
+        open: true,
+        key: count.current,
+        message: "Email sent",
+      },
+    ]);
+    count.current += 1;
   };
 
   const handleClose = (
@@ -20,20 +35,24 @@ const StackedSnackBar = ({ maxCount = 5 }: { maxCount: number }) => {
     if (reason === "clickaway") {
       return;
     }
-    setStacked((prev) => prev.map((_, i) => (i === index ? false : _)).filter(Boolean));
+    setStacked((prev) =>
+      prev
+        .map((_, i) => (i === index ? { ..._, open: false } : _))
+        .filter(({ open }) => open)
+    );
   };
 
   return (
     <div>
       <Button onClick={handleClick}>Open Snackbar</Button>
-      {stacked.map((open, index) => {
+      {stacked.map(({ open, key, message }, index) => {
         return (
           <Snackbar
-            key={index}
+            key={key}
             open={open}
             autoHideDuration={6000}
             onClose={(event, reason) => handleClose(event, reason, index)}
-            message={"message"}
+            message={message}
             anchorOrigin={{
               vertical: "bottom",
               horizontal: "right",
