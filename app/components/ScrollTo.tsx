@@ -10,7 +10,7 @@ const ScrollTo = ({ children }: { children: React.ReactNode }) => {
       const element = document.getElementById(id);
 
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+        element.scrollIntoView();
       }
     }
   }, []);
