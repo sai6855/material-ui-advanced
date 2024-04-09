@@ -1,11 +1,31 @@
 "use client";
 import * as React from "react";
-import { Snackbar, snackbarClasses } from "@mui/material";
+import Snackbar, {
+  SnackbarProps,
+  snackbarClasses,
+} from "@mui/material/Snackbar";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
-const StackedSnackBar = ({ maxCount = 5 }: { maxCount: number }) => {
+const snackbarMessages = [
+  "Message sent successfully!",
+  "Error: Please check your internet connection.",
+  "Welcome back! You have new notifications.",
+  "Thank you for your order!",
+  "Reminder: Your appointment is tomorrow.",
+];
+
+const StackedSnackBar = ({
+  maxCount = 5,
+  anchorOrigin = {
+    vertical: "bottom",
+    horizontal: "right",
+  },
+  ...props
+}: {
+  maxCount: number;
+} & SnackbarProps) => {
   const [stacked, setStacked] = React.useState<
     Array<{ open: boolean; key: number; message: string }>
   >([]);
@@ -21,7 +41,7 @@ const StackedSnackBar = ({ maxCount = 5 }: { maxCount: number }) => {
       {
         open: true,
         key: count.current,
-        message: "Email sent",
+        message: snackbarMessages[prev.length],
       },
     ]);
     count.current += 1;
@@ -48,18 +68,16 @@ const StackedSnackBar = ({ maxCount = 5 }: { maxCount: number }) => {
       {stacked.map(({ open, key, message }, index) => {
         return (
           <Snackbar
+            {...props}
             key={key}
             open={open}
             autoHideDuration={6000}
             onClose={(event, reason) => handleClose(event, reason, index)}
             message={message}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "right",
-            }}
+            anchorOrigin={anchorOrigin}
             sx={{
               [`&.${snackbarClasses.root}`]: {
-                bottom: (index + 1) * 24 + index * 30 + "px",
+                [anchorOrigin.vertical]: (index + 1) * 24 + index * 30 + "px",
               },
             }}
             action={
@@ -80,7 +98,12 @@ const StackedSnackBar = ({ maxCount = 5 }: { maxCount: number }) => {
 };
 
 function StackedSnackBarDemo() {
-  return <StackedSnackBar maxCount={5} />;
+  return (
+    <StackedSnackBar
+      maxCount={5}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+    />
+  );
 }
 
 export default StackedSnackBarDemo;
