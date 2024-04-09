@@ -18,11 +18,12 @@ Explore the components and view demos at [material-ui-advanced.com](https://mate
 
 - **Swipeable Tabs:** Tabs you can slide through to switch between different sections, making it easy to navigate on touchscreens. [Source code](https://github.com/sai6855/material-ui-advanced/blob/master/src/components/SwipeableTabs.tsx) [Demo](https://material-ui-advanced.com/#swipeable-tabs)
 
+- **Swipeable Tabs:** A stack of snackbars that appear one on top of the other, allowing users to see multiple notifications at once. [Source code](https://github.com/sai6855/material-ui-advanced/blob/master/src/components/StackedSnackBar.tsx) [Demo](https://material-ui-advanced.com/#stacked-snackbar)
+
 ## Upcoming Components
 
 Stay tuned for the following upcoming components:
 
-- Stacked Snackbar
 - Tagging in Text Area
 - Tour
 - Carousel
